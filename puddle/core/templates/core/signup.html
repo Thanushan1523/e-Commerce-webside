@@ -29,7 +29,14 @@ Signup
         <lable class='inline-block mb-2'> Repeat Password</lable><br>
         {{form.password2}}
     </div>
-    
+    {% if form.non_feild_errors or form.errors %}
+    <div class='mb-3 p-6 bg-red-100 rounded-xl'>
+        {% for feild in form %}
+           {{ feild.errors }}
+        {% endfor %}
+        {{form.non_feild_errors}}
+    </div>
+    {% endif %}
     <button class="py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl  text-white "  >Submit</button>
   </form> 
 
