@@ -23,7 +23,7 @@ def new(request):
                      item.created_by =request.user
                      item.save()
                      return redirect ('item:detail',pk=item.id)
-              else:
+        else:
                 form= NewItemForm()
 
         return render(request,'item/form.html',{
