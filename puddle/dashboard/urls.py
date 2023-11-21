@@ -3,6 +3,7 @@ from . import views
 
 app_name='dashboard'
 
-urlspatterns=[
+urlspatterns = [
     path('',views.index , name='index'),
 ]
+
