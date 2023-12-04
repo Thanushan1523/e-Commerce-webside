@@ -12,7 +12,7 @@ class Conversation(models.Model):
     class meta :
         ordering =('modified_at ',)
 
-class ConversationMessage(models.model):
+class ConversationMessage(models.Model):
     conversation =models.ForeignKey(Conversation , related_name='messages' , on_delete=models.CASCADE)
     content =models.TextField()
     created_at =models.DateTimeField(auto_now_add=True)
