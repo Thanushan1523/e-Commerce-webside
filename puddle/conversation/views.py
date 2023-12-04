@@ -8,4 +8,15 @@ def new_conversation (request ,item_pk):
 
     if item.created_by == request.user:
         return redirect ('dashboard:index')
-    conversation = Conversation.objects.filter(item=item).filter(members__in=[request.user.id])
+    conversations = Conversation.objects.filter(item=item).filter(members__in=[request.user.id])
+
+    if conversations:
+        pass #redirect to conversation
+    if request.method == 'post':
+        form = ConversationMessageForm(request.POST)
+
+        if form.is_valid():
+            conversation = Conversation.objects.create(item=item)
+            conversation.members.add(request.user)
+            conversation.members.add(item.created_by)
+            conversation.save()
