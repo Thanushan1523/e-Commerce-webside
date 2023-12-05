@@ -1,10 +1,10 @@
-from django.shortcuts import render ,get_list_or_404 ,redirect
+from django.shortcuts import render ,get_object_or_404 ,redirect
 from item.models import Item
 from .models import Conversation
 from .forms import ConversationMessageForm
 # Create your views here.
 def new_conversation (request ,item_pk):
-    item =get_list_or_404(Item ,pk=item_pk)
+    item =get_object_or_404(Item ,pk=item_pk)
 
     if item.created_by == request.user:
         return redirect ('dashboard:index')
@@ -12,7 +12,7 @@ def new_conversation (request ,item_pk):
 
     if conversations:
         pass #redirect to conversation
-    if request.method == 'post':
+    if request.method == 'POST':
         form = ConversationMessageForm(request.POST)
 
         if form.is_valid():
@@ -26,10 +26,10 @@ def new_conversation (request ,item_pk):
             conversation_message.created_by = request.user
             conversation_message.save()
             return redirect('item:detail',pk=item_pk )
-        else :
+    else :
             form = ConversationMessageForm ()
 
-        return render (request, 'conversation/new.html',{
+    return render (request, 'conversation/new.html',{
             'form':form
         })
 
