@@ -1,25 +1,17 @@
 {% extends "core/base.html" %}
-{% block tittle %}Inbox{% endblock tittle %}
+{% block tittle %}Conversation{% endblock tittle %}
 
 {% block content %}
-<h1 class="mb-6 text-3xl">Inbox</h1>
+<h1 class="mb-6 text-3xl">Conversation</h1>
 <div class= "space-y-6">
-    {%for conversation in conversations %}
-        <a href="#">
+    {%for message in conversations.messages.all %}
+       
             <div class="p-6 flex bg-gray-100 rounded-xl">
-                <div class="pr-6">
-                    <img src="{{ conversation.item.image.url}}" class="w-20 rounded-xl">
-                </div>
                 <div>
-                    {% for member in conversation.members.all %}
-                        {% if member != request.user %}
-                        <p class= "mb-4"><strong>{{member.username}}</strong> |{{ conversation.modified_at}}</p>
-                        <p>{{conversation.item.name}}</p>
-                        {% endif %}
-                    {% endfor %}
+                    <p class= "mb-4"><strong>{{ message.created_by.username}}</strong>@{{ message.created_at}}</p>
+                    <p> {{ message.content}}</p>
                 </div>
-            </div>
-        </a>   
+            </div> 
     {% endfor%}
 </div>
 
