@@ -1,5 +1,5 @@
 {% extends 'core/base.html'%}
-
+<link href="/static/css/style.css" rel="stylesheet">
 {% block tittle %} 
  Items
 {%endblock %}
@@ -28,11 +28,11 @@
     <div class="col-span-3">
         <div class="grid grid-cols-3 gap-3">
             {% for item in items %}
-            <div>
+            <div class="hi">
                    <a href="{% url 'item:detail' item.id %}">
                           <div>
                               {% if item.image %}   
-                                 <img src="{{item.image.url}}" class=" rouned-t-xl">
+                                 <img src="{{item.image.url}}" class="img-fluid rounded-xl">
                               {% else %}
                                   <h1> no image</h1>
      
